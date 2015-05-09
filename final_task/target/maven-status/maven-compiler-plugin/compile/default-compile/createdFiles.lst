@@ -1,0 +1,11 @@
+com\kzn\itis\db\config\DatabaseFConfiguration.class
+springmvc\web\UserController.class
+com\kzn\itis\Main.class
+com\kzn\itis\db\repositories\UserFRepository.class
+com\kzn\itis\db\model\OrderF.class
+springmvc\web\OrderController.class
+com\kzn\itis\db\repositories\impl\UserFRepositoryImpl.class
+com\kzn\itis\db\repositories\impl\OrderFRepositoryImpl.class
+com\kzn\itis\db\model\UserF.class
+springmvc\web\FinalTaskController.class
+com\kzn\itis\db\repositories\OrderFRepository.class

@@ -1,0 +1,57 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.kzn.itis.spring-mvc-example:spring-mvc-example:war:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-war-plugin is missing. @ line 192, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Spring Property Management Example 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ spring-mvc-example ---
+[INFO] Deleting C:\Users\Venera\workspace\final_task\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ spring-mvc-example ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ spring-mvc-example ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to C:\Users\Venera\workspace\final_task\target\classes
+[INFO] 
+[INFO] --- exec-maven-plugin:1.3.2:java (default-cli) @ spring-mvc-example ---
+[WARNING] Warning: killAfter is now deprecated. Do you need it ? Please comment on MEXEC-6.
+URL jdbc:derby:./users;create=true
+Statement : org.apache.derby.impl.jdbc.EmbedStatement@addfb7
+Connection : org.apache.derby.impl.jdbc.EmbedConnection@20617463 (XID = 192), (SESSIONID = 1), (DATABASE = ./users), (DRDAID = null) 
+[WARNING] 
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at com.kzn.itis.db.repositories.impl.OrderFRepositoryImpl.addOrder(OrderFRepositoryImpl.java:50)
+	at com.kzn.itis.Main.run(Main.java:101)
+	at com.kzn.itis.Main.main(Main.java:112)
+	... 6 more
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.304 s
+[INFO] Finished at: 2015-05-10T02:28:43+04:00
+[INFO] Final Memory: 17M/41M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.3.2:java (default-cli) on project spring-mvc-example: An exception occured while executing the Java class. null: InvocationTargetException: NullPointerException -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
