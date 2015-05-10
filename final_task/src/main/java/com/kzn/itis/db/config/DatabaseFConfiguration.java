@@ -15,5 +15,7 @@ public class DatabaseFConfiguration {
 	public String getDbUrl() {
 		return dbUrl;
 	}
-
+	public void setDbURL(String url){
+		this.dbUrl = url;
+	}
 }

@@ -16,12 +16,14 @@ import com.kzn.itis.db.repositories.OrderFRepository;
 
 @Repository("OrderRepository")
 public class OrderFRepositoryImpl implements OrderFRepository {
-	
-	public OrderFRepositoryImpl(){}
-	public OrderFRepositoryImpl(DatabaseFConfiguration config){
+
+	public OrderFRepositoryImpl() {
+	}
+
+	public OrderFRepositoryImpl(DatabaseFConfiguration config) {
 		this.config = config;
 	}
-	
+
 	@Autowired
 	private DatabaseFConfiguration config;
 
@@ -47,7 +49,7 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 		Connection con = null;
 		Statement stmnt = null;
 		try {
-			System.out.println("TEST_"+config.getDbUrl());
+			System.out.println("TEST_" + config.getDbUrl());
 			con = DriverManager.getConnection(config.getDbUrl());
 			System.out.println("Connection : " + con);
 			stmnt = con.createStatement();
@@ -57,8 +59,7 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 			System.out.println("Connection : " + con);
 			System.out.println("Statement : " + stmnt);
 		}
-		String sql = "INSERT INTO Orders VALUES (" + getIDCounter() + ",'"
-				+ order.getUser_id() + "','" + order.getBrand() + "',"
+		String sql = "INSERT INTO Orders VALUES (" + getIDCounter() + ","+ order.getUser_id() + ",'" + order.getBrand() + "',"
 				+ order.getPrice() + ")";
 
 		setIDCounter(getIDCounter() + 1);
@@ -66,6 +67,7 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 			stmnt.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("Insertion failed");
+			e.printStackTrace();
 		}
 		return order;
 	}
@@ -91,6 +93,8 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 		return temp;
 	}
 
+	
+	//+
 	public void orderFUpdate(int id, OrderF order) {
 		Connection con = null;
 		Statement stmnt = null;
@@ -102,9 +106,9 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 			System.out.println("Connection : " + con);
 			System.out.println("Statement : " + stmnt);
 		}
-		String sql = "UPDATE TABLE Orders SET User_id = '" + order.getUser_id()
-				+ "',brand = '" + order.getBrand() + "',price = "
-				+ order.getPrice() + " WHERE id =  " + id + ";";
+		String sql = "UPDATE Orders SET User_id = " + order.getUser_id()
+				+ ",brand = '" + order.getBrand() + "',price = "
+				+ order.getPrice() + " WHERE order_id =  " + id ;
 		try {
 			stmnt.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -126,11 +130,16 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 		}
 		long count = 0;
 		ResultSet res = null;
-		OrderF temp = null;
 		for (int i = 0; i < IDCounter; i++) {
-			temp = getOrder(i);
-			if (temp != null)
-				count++;
+			String sql = "SELECT * FROM Orders WHERE order_id = " + i;
+			try {
+				res = stmnt.executeQuery(sql);
+				if (res != null)
+					count++;
+			} catch (SQLException e) {
+				System.out.println("count failure");
+				e.printStackTrace();
+			}
 		}
 
 		return count;
@@ -149,7 +158,8 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 		}
 		ResultSet res = null;
 		OrderF temp = new OrderF();
-		String sql = "SELECT * FROM Orders WHERE id = " + id + ";";
+		String sql = "SELECT * FROM Orders WHERE order_id = " + id + ";";
+
 		try {
 			res = stmnt.executeQuery(sql);
 			temp.setOrder_id(res.getInt("order_id"));
@@ -159,7 +169,10 @@ public class OrderFRepositoryImpl implements OrderFRepository {
 			return temp;
 		} catch (SQLException e) {
 			System.out.println("Geting order failed");
+			//e.printStackTrace();
 		}
+
+	
 		return null;
 	}
 

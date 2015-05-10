@@ -1,1 +1,1 @@
-create database if not exists ${db.schema.name};
+create database if not exists itis_maven_schema_dev;

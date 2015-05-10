@@ -59,6 +59,11 @@ public class Main {
 		// Для вечной БД вместо ":memory..." пишем адрес директории
 		// оканчивающийся папкой с именем БД
 		System.out.println("URL " + url);
+		
+		//Warning:COSTYL//
+		config = new DatabaseFConfiguration();
+		config.setDbURL(url);
+		
 		Statement stmnt = null;
 		String sql = "";
 		Connection con;
@@ -72,7 +77,7 @@ public class Main {
 					.println("Failure of geting connection and creating statement");
 			e.printStackTrace();
 		}
-		/*
+		/**/
 		sql = "CREATE TABLE Users(" + "user_id INTEGER not NULL,"
 				+ "firstname VARCHAR(256)," + "lastname VARCHAR(256),"
 				+ "age INTEGER," + "PRIMARY KEY(user_id))";
@@ -81,23 +86,25 @@ public class Main {
 		} catch (SQLException e) {
 			System.out.println("Warning:the database Users wasn't created");
 		}
-
-		sql = "CREATE TABLE Orders("
-				+ "order_id INTEGER not NULL , user_id INTEGER not NULL,"
-				+ "price INTEGER NOT NULL," + "brand VARCHAR(256),"
+		 
+		sql = "CREATE TABLE Orders(order_id INTEGER not NULL , user_id INTEGER not NULL,brand VARCHAR(256),price INTEGER NOT NULL,"
 				+ "PRIMARY KEY(order_id))";
 		try {
 			stmnt.executeUpdate(sql);
+			System.out.println("WID");
 		} catch (SQLException e) {
 			System.out.println("Warning:the database Orders wasn't created");
+			//e.printStackTrace();
 		}
-		*/
+		
 		OrderF order = new OrderF(0, 0, "Blitz", 10000);
 		UserF user = new UserF(0, "Yummy", "Dummy", 24);
+		//System.out.println("config "+config);
+		//System.out.println("config "+config.getDbUrl());
 		OrderFRepositoryImpl orderCRUD = new OrderFRepositoryImpl(config);
 		UserFRepositoryImpl userCRUD = new UserFRepositoryImpl();
 		//logger.info("url=" + config.getDbUrl());
-		System.out.println(orderCRUD.getConfig());
+		System.out.println("orderCRUD.getConfig() "+orderCRUD.getConfig());
 		orderCRUD.addOrder(order);
 		//userCRUD.addUser(user);
 		order = new OrderF(0, 1, "Beintz", 15000);
@@ -105,6 +112,25 @@ public class Main {
 		System.out.println(orderCRUD.getCount());
 		System.out.println(orderCRUD.removeOrder(0));
 		System.out.println(orderCRUD.getCount());
+		
+		sql = "Drop TABLE Orders";
+		try {
+			stmnt.executeUpdate(sql);
+			System.out.println("WID");
+		} catch (SQLException e) {
+			System.out.println("Warning:the database Orders wasn't dropped");
+			e.printStackTrace();
+		}
+		
+		sql = "Drop TABLE Users";
+		try {
+			stmnt.executeUpdate(sql);
+			System.out.println("WID");
+		} catch (SQLException e) {
+			System.out.println("Warning:the database Users wasn't dropped");
+		}
+		
+
 	}
 
 	public static void main(String... args) throws SQLException {

@@ -13,7 +13,8 @@
     <context:property-placeholder location="file:./src/main/resources/derby.properties"/>
 
     <bean name="exampleApp" class="com.kzn.itis.Main"/>
-
+	<bean name = "UserRepositoryImpl" class ="com.kzn.itis.db.repositories.impl.UserRepositoryImpl"/>
+	<bean name = "OrderRepositoryImpl" class ="com.kzn.itis.db.repositories.impl.OrderRepositoryImpl"/>
 
 
 </beans>
